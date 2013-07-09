@@ -1,0 +1,1 @@
+### A Apache Solr web application project with maven feature
