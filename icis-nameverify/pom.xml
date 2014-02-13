@@ -8,9 +8,7 @@
     <artifactId>solr</artifactId>
     <version>0.1</version>
   </parent>
-  <groupId>com.topsoft.searche</groupId>
   <artifactId>icis-nameverify</artifactId>
-  <version>0.1</version>
   <packaging>war</packaging>
   <name>icis-nameverify Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -56,6 +54,17 @@
       <artifactId>solr</artifactId>
       <type>war</type>
     </dependency>
+    <dependency>
+      <groupId>org.apache.solr</groupId>
+      <artifactId>solr-analysis-extras</artifactId>
+    </dependency>
+    <!-- icis-dataimport-scheduler -->
+    <dependency>
+      <groupId>com.topsoft.search</groupId>
+      <artifactId>icis-dataimport-scheduler</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -118,37 +127,44 @@
                     filtering to it.
                 -->
                 <resource>
-                  <directory>${project.basedir}/src/main/resources</directory>
+                  <directory>${project.basedir}/src/main/solr</directory>
                   <filtering>true</filtering>
                   <targetPath>${solr.solr.home}</targetPath>
                   <includes>
                     <include>solr.xml</include>
                   </includes>
                 </resource>
-                <!-- Copies configuration files -->
+                <!-- Copies dataimport.properties to correct directory and applies properties
+                     filering to it.
+                -->
                 <resource>
-                  <directory>${project.basedir}/src/main/config</directory>
-                  <targetPath>${solr.solr.home}/${solr.default.core.directory}/conf</targetPath>
-                  <excludes>
-                    <exclude>lang</exclude>
-                    <exclude>velocity</exclude>
-                    <exclude>xslt</exclude>
-                  </excludes>
+                  <directory>${project.basedir}/src/main/solr</directory>
+                  <filtering>true</filtering>
+                  <targetPath>${solr.solr.home}/conf</targetPath>
+                  <includes>
+                    <include>dataimport.properties</include>
+                  </includes>
                 </resource>
-                <!-- Copies language specific configuration files -->
+                <!-- Copies core0 configuration files -->
                 <resource>
-                  <directory>${project.basedir}/src/main/config/lang</directory>
-                  <targetPath>${solr.solr.home}/${solr.default.core.directory}/conf/lang</targetPath>
+                  <directory>${project.basedir}/src/main/multicore/core0/config</directory>
+                  <filtering>true</filtering>
+                  <targetPath>${solr.solr.home}/${solr.core0.directory}/conf</targetPath>
+                  <preservePath>true</preservePath>
                 </resource>
-                <!-- Copy Velocity macros and other files -->
+                <!-- Copies core1 configuration files -->
                 <resource>
-                  <directory>${project.basedir}/src/main/config/velocity</directory>
-                  <targetPath>${solr.solr.home}/${solr.default.core.directory}/conf/velocity</targetPath>
+                  <directory>${project.basedir}/src/main/multicore/core1/config</directory>
+                  <filtering>true</filtering>
+                  <targetPath>${solr.solr.home}/${solr.core1.directory}/conf</targetPath>
+                  <preservePath>true</preservePath>
                 </resource>
-                <!-- Copy XSL style sheets -->
+                <!-- Copies core2 configuration files -->
                 <resource>
-                  <directory>${project.basedir}/src/main/config/xslt</directory>
-                  <targetPath>${solr.solr.home}/${solr.default.core.directory}/conf/xslt</targetPath>
+                  <directory>${project.basedir}/src/main/multicore/core2/config</directory>
+                  <filtering>true</filtering>
+                  <targetPath>${solr.solr.home}/${solr.core2.directory}/conf</targetPath>
+                  <preservePath>true</preservePath>
                 </resource>
               </resources>
             </configuration>
@@ -180,14 +196,27 @@
                     <include>solr.xml</include>
                   </includes>
                 </resource>
-                <!-- Remove the conf directory -->
+                <!-- Remove the solr home dataimport.properties -->
+                <resource>
+                  <clean>true</clean>
+                  <directory>${solr.solr.home}/conf</directory>
+                  <includes>
+                    <include>dataimport.properties</include>
+                  </includes>
+                </resource>
+                <!-- Remove the multicore conf directory -->
                 <resource>
                   <clean>true</clean>
                   <cleanEmptyDirectories>true</cleanEmptyDirectories>
-                  <directory>${solr.solr.home}/${solr.default.core.directory}</directory>
+                  <directory>${solr.solr.home}</directory>
                   <includes>
-                    <include>conf</include>
+                    <include>${solr.core0.directory}/conf/**, ${solr.core1.directory}/conf/**, ${solr.core2.directory}/conf/**</include>
                   </includes>
+                  <excludes>
+                    <exclude>${solr.core0.directory}/conf/dataimport.properties</exclude>
+                    <exclude>${solr.core1.directory}/conf/dataimport.properties</exclude>
+                    <exclude>${solr.core2.directory}/conf/dataimport.properties</exclude>
+                  </excludes>
                 </resource>
               </resources>
             </configuration>

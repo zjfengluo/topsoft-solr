@@ -1,0 +1,15 @@
+<dataConfig>
+  <propertyWriter dateFormat="yyyy-MM-dd HH:mm:ss" type="SimplePropertiesWriter"/>
+  <dataSource type="JdbcDataSource"
+              driver="${solr.dataimport.jdbc.driver}"
+              url="${solr.dataimport.jdbc.url}"
+              user="${solr.dataimport.jdbc.user}"
+              password="${solr.dataimport.jdbc.password}"/>
+  <document>
+    <entity name="trademark"
+            query="SELECT ID, TMNAME FROM REG_TrademarkName">
+      <field column="ID" name="id"/>
+      <field column="TMNAME" name="tmName"/>
+    </entity>
+  </document>
+</dataConfig>

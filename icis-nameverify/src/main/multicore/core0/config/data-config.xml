@@ -1,0 +1,28 @@
+<dataConfig>
+  <propertyWriter dateFormat="yyyy-MM-dd HH:mm:ss" type="SimplePropertiesWriter"/>
+  <dataSource type="JdbcDataSource"
+              driver="${solr.dataimport.jdbc.driver}"
+              url="${solr.dataimport.jdbc.url}"
+              user="${solr.dataimport.jdbc.user}"
+              password="${solr.dataimport.jdbc.password}"/>
+  <document>
+    <!--<entity name="namestore"-->
+    <!--query="select ID, ENTTRA from REG_nameStore"-->
+    <!--deltaImportQuery="select ID, ENTTRA from REG_nameStore-->
+    <!--where ID = '${dataimporter.delta.id}'"-->
+    <!--deltaQuery="select ID from REG_nameStore-->
+    <!--where TIMESTAMP &gt; '${dataimporter.last_index_time}'"-->
+    <!-->-->
+    <entity name="namestore" transformer="DateFormatTransformer" pk="ID"
+            query="SELECT ID, ENTTRA, to_char(coalesce(SAVEPERTO, to_timestamp('2070-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')), 'YYYY-MM-DD HH24:MI:SS')
+                   AS SAVEPERTO, NAMEDISTCODE, INDUSTRYPHY FROM REG_nameStore
+                   WHERE '${dataimporter.request.clean}' != 'false'
+                   OR TIMESTAMP &gt; to_timestamp('${dataimporter.last_index_time}', 'YYYY-MM-DD HH24:MI:SS')">
+      <field column="ID" name="id"/>
+      <field column="ENTTRA" name="entTra"/>
+      <field column="SAVEPERTO" name="savePerTo" dateTimeFormat="yyyy-MM-dd HH:mm:ss"/>
+      <field column="NAMEDISTCODE" name="nameDistCode"/>
+      <field column="INDUSTRYPHY" name="industryPhy"/>
+    </entity>
+  </document>
+</dataConfig>

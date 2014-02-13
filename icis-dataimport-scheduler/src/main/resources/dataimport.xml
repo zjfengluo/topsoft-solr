@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataimport>
+  <triggers>
+    <trigger name="every_minute">
+      <!-- type accept [delay, time] -->
+      <!-- time-unit accept [milliseconds, seconds, minutes, hours, days] -->
+      <start-time type="delay" time-unit="minutes">1</start-time>
+      <repeat time-unit="minutes">1</repeat>
+    </trigger>
+
+    <trigger name="every_5_minute">
+      <start-time type="delay" time-unit="minutes">1</start-time>
+      <repeat time-unit="minutes">5</repeat>
+    </trigger>
+
+    <trigger name="at_3_clock_every_day">
+      <start-time type="time">03:00:00</start-time>
+      <repeat time-unit="days">1</repeat>
+    </trigger>
+  </triggers>
+
+  <!-- when to suspend the trigger -->
+  <trigger-suspensions>
+    <trigger-suspension name="working_day">
+      <time-range from="23:00:00" to="06:00:00" />
+      <weekday>3</weekday>
+      <weekday>6</weekday>
+      <weekday>7</weekday>
+    </trigger-suspension>
+    <trigger-suspension name="some_sample">
+      <time-range from="02:00:00" to="03:00:00" />
+      <month-day month="1">31</month-day>
+      <month-weekday month="5" week="2">7</month-weekday>
+      <weekday>6</weekday>
+      <weekday>7</weekday>
+    </trigger-suspension>
+  </trigger-suspensions>
+
+  <requests>
+    <request name="full_import_completely">
+      <parameter name="command">full-import</parameter>
+      <parameter name="clean">true</parameter>
+      <parameter name="commit">true</parameter>
+    </request>
+
+    <request name="full_import_without_clean_and_commit">
+      <parameter name="command">full-import</parameter>
+      <parameter name="clean">false</parameter>
+      <parameter name="commit">false</parameter>
+    </request>
+
+    <request name="delta-import_with_commit">
+      <parameter name="command">delta-import</parameter>
+      <parameter name="clean">false</parameter>
+      <parameter name="commit">true</parameter>
+    </request>
+
+    <request name="delta_import_without_commit">
+      <parameter name="command">delta-import</parameter>
+      <parameter name="clean">false</parameter>
+    </request>
+
+    <request name="abort">
+      <parameter name="command">abort</parameter>
+    </request>
+  </requests>
+
+  <servers>
+    <server dataimport-path="/test">
+      <scheduler trigger="every_5_minute" request="delta_import_without_commit" suspend-with="working_day"/>
+    </server>
+    <server host="localhost" port="8983" context="solr">
+      <core name="namestore" dataimport-path="namestoreDataImport">
+        <scheduler trigger="every_minute" request="full_import_without_clean_and_commit" suspend-with="working_day" />
+      </core>
+      <core name="keywords" dataimport-path="/keywords-dataimport/">
+        <scheduler trigger="at_3_clock_every_day" request="full_import_completely"/>
+      </core>
+      <core name="trademark">
+        <scheduler trigger="at_3_clock_every_day" request="full_import_completely" />
+      </core>
+    </server>
+
+    <server host="192.168.3.17" port="9081" context="solr" dataimport-path="/multicore">
+      <core name="namestore">
+        <scheduler trigger="every_minute" request="full_import_without_clean_and_commit" suspend-with="some_sample"/>
+      </core>
+      <core name="keywords">
+        <scheduler trigger="at_3_clock_every_day" request="full_import_completely"/>
+      </core>
+      <core name="trademark">
+        <scheduler trigger="at_3_clock_every_day" request="full_import_completely" />
+      </core>
+    </server>
+  </servers>
+</dataimport>
