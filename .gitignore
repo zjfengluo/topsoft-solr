@@ -32,7 +32,9 @@ local.properties
 
 target/
 
+### ignore icis-nameverify special folders
 overlays/
+logs/
 
 ### /Users/wangyg/.gitignore-boilerplates/Global/IntelliJ.gitignore
 
