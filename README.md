@@ -7,3 +7,4 @@
 * **[icic-dataimport-scheduler](https://github.com/wangyingang/topsoft-solr/tree/master/icis-dataimport-scheduler)** 是一个用于同步solr索引的库，以配置的方式可以定义各种细粒度的定时调度作业。
 * **[icis-nameverify](https://github.com/wangyingang/topsoft-solr/tree/master/icis-nameverify)**是一个solr 4.3多核结构的web示例程序，里面配置了工商企业名称查重的索引结构，其主要目的是将**icis-dataimport-scheduler**打包到该web应用程序中，可以看作是一个提供了自动同步索引功能的**solr.war**。
 * **[icis-nameverify-client](https://github.com/wangyingang/topsoft-solr/tree/master/icis-nameverify-client)**是一个工商企业名称查重的客户端，提供了综合业务系统使用，依赖于**solrj-client**库。
+* * **[icis-ecps-client](https://github.com/wangyingang/topsoft-solr/tree/master/icis-ecps-client)**是企业信用信息公示系统的企业查询的客户端，包含了给国家系统和公司系统使用的两套接口，依赖于**solrj-client**库。
