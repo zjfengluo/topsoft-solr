@@ -15,10 +15,11 @@ import static org.junit.Assert.assertThat;
  */
 public class AnnotationsTest {
   @Highlight
-  private String name;
-  @Highlight
   @DocumentId
   private Long id;
+
+  @Highlight
+  private String name;
 
   @Field("shengri")
   @Highlight
