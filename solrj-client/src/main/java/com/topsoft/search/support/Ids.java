@@ -47,4 +47,5 @@ public class Ids {
       return (T) doc.getFieldValue(fieldName);
     }
   }
+
 }

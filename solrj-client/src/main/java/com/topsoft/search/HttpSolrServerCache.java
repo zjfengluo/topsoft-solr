@@ -39,7 +39,7 @@ public class HttpSolrServerCache extends ForwardingLoadingCache<String, HttpSolr
     }
 
     private String normalizeKey(String key) {
-     checkArgument(key != null && key.length() > 0, "key must not be null or empty.");
+      checkArgument(key != null && key.length() > 0, "key must not be null or empty.");
       return key.trim().toLowerCase();
     }
   };

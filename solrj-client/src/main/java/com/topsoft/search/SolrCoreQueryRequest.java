@@ -3,7 +3,6 @@ package com.topsoft.search;
 import java.util.Map;
 
 /**
- *
  * @author wangyg
  */
 public interface SolrCoreQueryRequest {
