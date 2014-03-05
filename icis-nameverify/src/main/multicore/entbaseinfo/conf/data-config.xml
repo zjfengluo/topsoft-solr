@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataConfig>  
+  <propertyWriter dateFormat="yyyy-MM-dd HH:mm:ss" type="SimplePropertiesWriter"/>
+  <dataSource type="JdbcDataSource"               
+			  driver="oracle.jdbc.OracleDriver"
+              url="jdbc:oracle:thin:@192.168.3.35:1521:tmcpp" 
+              user="ecps" 
+			  batchsize="20"
+              password="oracle" />
+  <document>
+    <entity name="entbase" pk="ID" 
+            query="select m.ID,
+		            m.entName,
+		            m.regOrgName,
+		            m.regNo,
+					m.leRep,
+					nvl2(m.estDate,to_char(m.estDate,'YYYY-MM-DD')||'T00:00:00Z',null) as estDate,
+		            coalesce(m.Dom,m.OpLoc) as domOrOpLoc,
+		            m.regCap,
+		            (case 
+						when m.RegCap is null then null
+						when m.RegCap &lt; 10 then '1'
+						when m.RegCap &lt; 100 and m.RegCap &gt;= 10 then '2'
+						when m.RegCap &lt; 1000 and m.RegCap &gt;= 100 then '3'
+						when m.RegCap &gt;= 1000 then '4'
+					end) as regCapLevel,
+					m.regCapCurName,
+		            m.industryPhy,
+		            m.industryPhyName,
+		            m.opLocDistrict,
+					m.entType,
+					m.entTypeName
+					from ICIS_MarPriPInfo m"
+			deltaImportQuery="select m.id,
+		            m.entName,
+		            m.regOrgName,
+		            m.regNo,
+					m.leRep,
+					nvl2(m.estDate,to_char(m.estDate,'YYYY-MM-DD')||'T00:00:00Z',null) as estDate,
+		            coalesce(m.Dom,m.OpLoc) as domOrOpLoc,
+		            m.regCap,
+		            (case 
+						when m.RegCap is null then null
+						when m.RegCap &lt; 10 then 1
+						when m.RegCap &lt; 100 and m.RegCap &gt;= 10 then 2
+						when m.RegCap &lt; 1000 and m.RegCap &gt;= 100 then 3
+						when m.RegCap &gt;= 1000 then 4
+					end) as regCapLevel,
+					m.regCapCurName,
+		            m.industryPhy,
+		            m.industryPhyName,
+		            m.opLocDistrict,
+					m.entType,
+					m.entTypeName
+					from ICIS_MarPriPInfo m and m.ID='${dataimporter.delta.ID}'"
+			deltaQuery="select m.ID from ICIS_MarPriPInfo m where m.Timestamp &gt; to_timestamp('${dataimporter.last_index_time}', 'YYYY-MM-DD HH24:MI:SS')">	
+			<field column="ID" name="id"/>
+    </entity>
+  </document>
+</dataConfig>
