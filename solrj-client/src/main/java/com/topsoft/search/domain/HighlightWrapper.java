@@ -1,4 +1,4 @@
-package com.topsoft.search.support;
+package com.topsoft.search.domain;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;

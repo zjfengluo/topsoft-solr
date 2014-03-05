@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.topsoft.search.ResultTransformer;
 import com.topsoft.search.annotations.Annotations;
 import com.topsoft.search.annotations.DocumentId;
+import com.topsoft.search.domain.HighlightWrapper;
 import org.apache.solr.client.solrj.beans.DocumentObjectBinder;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
