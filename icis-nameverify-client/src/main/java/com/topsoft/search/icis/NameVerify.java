@@ -3,8 +3,8 @@ package com.topsoft.search.icis;
 
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.MoreExecutors;
+import com.topsoft.search.PagableSolrMultiCoreQuery;
 import com.topsoft.search.SolrCoreQueryRequest;
-import com.topsoft.search.SolrMultiCoreQuery;
 import com.topsoft.search.domain.Page;
 import com.topsoft.search.domain.Pageable;
 import com.topsoft.search.support.Ids;
@@ -101,10 +101,10 @@ import static com.google.common.collect.Maps.newHashMap;
  */
 
 public class NameVerify {
-  private final SolrMultiCoreQuery query;
+  private final PagableSolrMultiCoreQuery query;
 
   public NameVerify(String baseURL) {
-    this.query = new SolrMultiCoreQuery(baseURL);
+    this.query = new PagableSolrMultiCoreQuery(baseURL);
   }
 
   public List<Long> findAllIdFromNamestore(String enterpriseName, String nameDistCode, String industryPhy) {
