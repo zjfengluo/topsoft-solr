@@ -54,7 +54,7 @@
 		            m.opLocDistrict,
 					m.entType,
 					m.entTypeName
-					from ICIS_MarPriPInfo m and m.ID='${dataimporter.delta.ID}'"
+					from ICIS_MarPriPInfo m where m.ID='${dataimporter.delta.ID}'"
 			deltaQuery="select m.ID from ICIS_MarPriPInfo m where m.Timestamp &gt; to_timestamp('${dataimporter.last_index_time}', 'YYYY-MM-DD HH24:MI:SS')">	
 			<field column="ID" name="id"/>
     </entity>
