@@ -109,6 +109,8 @@
    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
    <!--企业名称-->
    <field name="entName" type="text_smartcn" indexed="true" stored="true"/>
+   <!--企业名称长度-->
+   <field name="entNameLength" type="int" indexed="true" stored="false"/>
    <!--管辖单位名称-->
    <field name="regOrgName" type="string" indexed="false" stored="true"/>
    <!--注册号-->
@@ -116,7 +118,7 @@
    <!--法定代表人 -->
    <field name="leRep" type="text_general" indexed="true" stored="true"/>
    <!--成立日期-->
-   <field name="estDate" type="date" indexed="false" stored="true"/>
+   <field name="estDate" type="date" indexed="false" stored="true" docValues="true" default="1949-10-01T00:00:00Z"/>
    <!--经营场所 -->
    <field name="domOrOpLoc" type="text_smartcn" indexed="true" stored="true"/>
    <!--注册资本-->

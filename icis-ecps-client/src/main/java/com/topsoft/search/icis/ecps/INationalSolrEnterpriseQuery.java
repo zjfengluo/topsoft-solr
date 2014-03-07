@@ -8,7 +8,7 @@ import java.util.List;
  * @author weichao
  *
  */
-public interface INationalSolrEnterpriseQuery extends ISolrEnterpriseQuery<NationalEntBaseInfo>{
+public interface INationalSolrEnterpriseQuery extends ISolrEnterpriseQuery<NationalEntBaseInfoBean>{
 	
 	static final String coreName = "entbaseInfo";
 	

@@ -16,6 +16,7 @@ import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -46,6 +47,7 @@ public class NationalSolrEnterpriseQueryTest {
 	public static final String industryPhy = "C";
 
 	@Test
+	@Ignore
 	public void testHighlight() {
 		SolrQuery query = new SolrQuery("entName:" + keyword);
 		query.setStart(0);
@@ -90,11 +92,11 @@ public class NationalSolrEnterpriseQueryTest {
 		SolrServer solr = new HttpSolrServer(baseURL+"/entbaseinfo");
 		SolrInputDocument document = new SolrInputDocument();
 		document.addField("id", "5521991");
-		document.addField("entName", keyword);
+		document.addField("entName", keyword+"牛肉");
 		document.addField("regCap", "9.99");
 		document.addField("regCapLevel", "1");
-		document.addField("domOrOpLoc", keyword);
-		document.addField("leRep", keyword);
+		document.addField("domOrOpLoc", keyword+"牛肉");
+		document.addField("leRep", keyword+"牛肉");
 		document.addField("regNo", regNo);
 		document.addField("opLocDistrict", opLocDistrict);
 		document.addField("entType", entType);

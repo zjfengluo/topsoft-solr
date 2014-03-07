@@ -3,7 +3,6 @@ package com.topsoft.search.icis.ecps;
 import java.util.List;
 
 import com.topsoft.search.domain.Page;
-import com.topsoft.search.domain.Pageable;
 
 /**
  * 拓普企业信用公示系统-企业信息查询接口
@@ -11,7 +10,7 @@ import com.topsoft.search.domain.Pageable;
  * @author weichao
  *
  */
-public interface ITopSolrEnterpriseQuery extends ISolrEnterpriseQuery<TopEntBaseInfo>{
+public interface ITopSolrEnterpriseQuery extends ISolrEnterpriseQuery<TopEntBaseInfoBean>{
 	
 	public static final String coreName = "entbaseinfo";
 
@@ -28,10 +27,11 @@ public interface ITopSolrEnterpriseQuery extends ISolrEnterpriseQuery<TopEntBase
 	 * </p>
 	 * 
 	 * @param keyword 用户输入的查询关键字
-	 * @param pageRequest 分页信息
+	 * @param currentPage 当前页号
+	 * @param pageSize 每页条数
 	 * @return 包含企业信息和分页信息的Page对象实例
 	 */
-	Page<TopEntBaseInfo> findByEntName(final String keyword, Pageable pageRequest);
+	Page<TopEntBaseInfo> findByEntName(final String keyword, int currentPage, int pageSize);
 	
 	/**
 	 * 根据注册号查询企业信息
@@ -56,10 +56,11 @@ public interface ITopSolrEnterpriseQuery extends ISolrEnterpriseQuery<TopEntBase
 	 * </p>
 	 * 
 	 * @param keyword 用户输入的查询关键字
-	 * @param pageRequest 分页信息
+	 * @param currentPage 当前页号
+	 * @param pageSize 每页条数
 	 * @return 包含企业信息和分页信息的Page对象实例
 	 */
-	Page<TopEntBaseInfo> findByLeRep(final String keyword, Pageable pageRequest);
+	Page<TopEntBaseInfo> findByLeRep(final String keyword, int currentPage, int pageSize);
 	
 	/**
 	 * 根据经营地址查询企业信息
@@ -74,10 +75,11 @@ public interface ITopSolrEnterpriseQuery extends ISolrEnterpriseQuery<TopEntBase
 	 * </p>
 	 * 
 	 * @param keyword 用户输入的查询关键字
-	 * @param pageRequest 分页信息
+	 * @param currentPage 当前页号
+	 * @param pageSize 每页条数
 	 * @return 包含企业信息和分页信息的Page对象实例
 	 */
-	Page<TopEntBaseInfo> findByOpLoc(final String keyword, Pageable pageRequest);
+	Page<TopEntBaseInfo> findByOpLoc(final String keyword, int currentPage, int pageSize);
 	
 	/**
 	 * 企业信息高级查询
@@ -105,11 +107,12 @@ public interface ITopSolrEnterpriseQuery extends ISolrEnterpriseQuery<TopEntBase
 	 * 						LEVEL3-(100万  ~ 1000万) <br/>
 	 * 						LEVEL4-(1000万以上)
 	 * @param entTypes 企业类型数组，元素是真实的企业类型代码，该数组限定了用户所希望获取到的所有企业类型。
-	 * @param pageRequest
-	 * @return
+	 * @param currentPage 当前页号
+	 * @param pageSize 每页条数
+	 * @return 企业基本信息
 	 */
 	Page<TopEntBaseInfo> advancedFind(final String keyword,
 			final String opLocDistrict, final String industryPhy,
 			final RegCapLevel regCapLevel, final String[] entTypes,
-			Pageable pageRequest);
+			int currentPage, int pageSize);
 }

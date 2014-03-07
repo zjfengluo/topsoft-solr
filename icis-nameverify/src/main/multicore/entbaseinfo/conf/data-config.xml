@@ -11,6 +11,7 @@
     <entity name="entbase" pk="ID" 
             query="select m.ID,
 		            m.entName,
+		            length(trim(m.entName)) as entNameLength,
 		            m.regOrgName,
 		            m.regNo,
 					m.leRep,
@@ -33,6 +34,7 @@
 					from ICIS_MarPriPInfo m"
 			deltaImportQuery="select m.id,
 		            m.entName,
+		            length(trim(m.entName)) as entNameLength,
 		            m.regOrgName,
 		            m.regNo,
 					m.leRep,

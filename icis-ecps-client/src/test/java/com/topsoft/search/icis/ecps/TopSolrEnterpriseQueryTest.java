@@ -13,8 +13,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import com.topsoft.search.domain.Page;
-import com.topsoft.search.domain.PageRequest;
-import com.topsoft.search.domain.Pageable;
 
 /**
  * 拓普企业信用信息公示系统企业查询接口 - 单元测试
@@ -25,7 +23,9 @@ import com.topsoft.search.domain.Pageable;
 @RunWith(JUnit4.class)
 public class TopSolrEnterpriseQueryTest {
 
-	private Pageable pageRequest = PageRequest.builder(1, 10).build();
+	private static final int currentPagePageable = 1;
+	
+	private static final int pageSize = 10;
 
 	private TopSolrEnterpriseQuery query = new TopSolrEnterpriseQuery(
 			NationalSolrEnterpriseQueryTest.baseURL);
@@ -46,7 +46,7 @@ public class TopSolrEnterpriseQueryTest {
 	@Test
 	public void testFindByEntName() {
 		Page<TopEntBaseInfo> page = query.findByEntName(
-				NationalSolrEnterpriseQueryTest.keyword, pageRequest);
+				NationalSolrEnterpriseQueryTest.keyword, currentPagePageable, pageSize);
 		assertTrue(page.getNumberOfElements() > 0);
 	}
 
@@ -65,7 +65,7 @@ public class TopSolrEnterpriseQueryTest {
 	@Test
 	public void testFindByLeRep() {
 		Page<TopEntBaseInfo> page = query.findByLeRep(
-				NationalSolrEnterpriseQueryTest.keyword, pageRequest);
+				NationalSolrEnterpriseQueryTest.keyword, currentPagePageable, pageSize);
 		assertTrue(page.getNumberOfElements() > 0);
 	}
 
@@ -75,7 +75,7 @@ public class TopSolrEnterpriseQueryTest {
 	@Test
 	public void testFindByOpLoc() {
 		Page<TopEntBaseInfo> page = query.findByOpLoc(
-				NationalSolrEnterpriseQueryTest.keyword, pageRequest);
+				NationalSolrEnterpriseQueryTest.keyword, currentPagePageable, pageSize);
 		assertTrue(page.getNumberOfElements() > 0);
 	}
 
@@ -86,14 +86,14 @@ public class TopSolrEnterpriseQueryTest {
 	public void testAdvancedFind() {
 		Page<TopEntBaseInfo> page = query.advancedFind(
 				NationalSolrEnterpriseQueryTest.keyword, null, null, null,
-				null, pageRequest);
+				null, currentPagePageable, pageSize);
 		assertTrue(page.getNumberOfElements() >= 1);
 		page = query.advancedFind(NationalSolrEnterpriseQueryTest.keyword,
 				NationalSolrEnterpriseQueryTest.opLocDistrict,
 				NationalSolrEnterpriseQueryTest.industryPhy,
 				RegCapLevel.LEVEL1,
 				new String[] { NationalSolrEnterpriseQueryTest.entType },
-				pageRequest);
+				currentPagePageable, pageSize);
 		assertTrue(page.getNumberOfElements() >= 1);
 	}
 
