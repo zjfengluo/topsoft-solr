@@ -166,6 +166,13 @@
                   <targetPath>${solr.solr.home}/${solr.core2.directory}/conf</targetPath>
                   <preservePath>true</preservePath>
                 </resource>
+                <!-- Copies entbaseinfo configuration files -->
+                <resource>
+                  <directory>${project.basedir}/src/main/multicore/entbaseinfo/conf</directory>
+                  <filtering>true</filtering>
+                  <targetPath>${solr.solr.home}/${solr.entbaseinfo.directory}/conf</targetPath>
+                  <preservePath>true</preservePath>
+                </resource>
               </resources>
             </configuration>
           </execution>
@@ -210,12 +217,13 @@
                   <cleanEmptyDirectories>true</cleanEmptyDirectories>
                   <directory>${solr.solr.home}</directory>
                   <includes>
-                    <include>${solr.core0.directory}/conf/**, ${solr.core1.directory}/conf/**, ${solr.core2.directory}/conf/**</include>
+                    <include>${solr.core0.directory}/conf/**, ${solr.core1.directory}/conf/**, ${solr.core2.directory}/conf/**, ${solr.entbaseinfo.directory}/conf/**</include>
                   </includes>
                   <excludes>
                     <exclude>${solr.core0.directory}/conf/dataimport.properties</exclude>
                     <exclude>${solr.core1.directory}/conf/dataimport.properties</exclude>
                     <exclude>${solr.core2.directory}/conf/dataimport.properties</exclude>
+                    <exclude>${solr.entbaseinfo.directory}/conf/dataimport.properties</exclude>
                   </excludes>
                 </resource>
               </resources>
@@ -245,5 +253,57 @@
         </configuration>
       </plugin>
     </plugins>
+    <pluginManagement>
+    	<plugins>
+    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    		<plugin>
+    			<groupId>org.eclipse.m2e</groupId>
+    			<artifactId>lifecycle-mapping</artifactId>
+    			<version>1.0.0</version>
+    			<configuration>
+    				<lifecycleMappingMetadata>
+    					<pluginExecutions>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>com.github.goldin</groupId>
+    								<artifactId>
+    									copy-maven-plugin
+    								</artifactId>
+    								<versionRange>
+    									[0.2.5,)
+    								</versionRange>
+    								<goals>
+    									<goal>copy</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>org.codehaus.mojo</groupId>
+    								<artifactId>
+    									properties-maven-plugin
+    								</artifactId>
+    								<versionRange>
+    									[1.0-alpha-2,)
+    								</versionRange>
+    								<goals>
+    									<goal>
+    										read-project-properties
+    									</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    					</pluginExecutions>
+    				</lifecycleMappingMetadata>
+    			</configuration>
+    		</plugin>
+    	</plugins>
+    </pluginManagement>
   </build>
 </project>
