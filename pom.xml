@@ -136,7 +136,7 @@
 
   <distributionManagement>
     <repository>
-      <id>releases</id>
+      <id>nexus</id>
       <name>Internal Releases</name>
       <url>http://192.168.3.17:8081/nexus/content/repositories/releases/</url>
     </repository>

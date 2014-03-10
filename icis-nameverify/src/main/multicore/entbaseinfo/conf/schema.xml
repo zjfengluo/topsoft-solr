@@ -134,7 +134,7 @@
    <!--地区范围-->
    <field name="opLocDistrict" type="string" indexed="true" stored="false" />
    <!--企业类型代码-->
-   <field name="entType" type="string" indexed="true" stored="false" />
+   <field name="entType" type="string" indexed="true" stored="true" />
    <!--企业类型名称-->
    <field name="entTypeName" type="string" indexed="false" stored="true" />
         

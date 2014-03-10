@@ -50,7 +50,9 @@ public class NationalSolrEnterpriseQuery implements INationalSolrEnterpriseQuery
 			String regOrgName = regOrgNameO == null ? null : regOrgNameO.toString();
 			Object estDateO = input.getFieldValue("estDate");
 			Date estDate = estDateO == null ? null : (Date) estDateO;
-			NationalEntBaseInfoBean bean = new NationalEntBaseInfoBean(id,entName,regNo,leRep,regOrgName,estDate);
+			Object entTypeO = input.getFieldValue("entType");
+			String entType = entTypeO == null ? null : entTypeO.toString();
+			NationalEntBaseInfoBean bean = new NationalEntBaseInfoBean(id, entName, regNo, leRep, regOrgName, estDate, entType);
 			return bean;
 		}
 		
