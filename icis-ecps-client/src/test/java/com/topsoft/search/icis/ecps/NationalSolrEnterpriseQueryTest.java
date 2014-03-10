@@ -32,7 +32,7 @@ import com.topsoft.search.HttpSolrServerCache;
 @RunWith(JUnit4.class)
 public class NationalSolrEnterpriseQueryTest {
 	
-	public static final String baseURL = "http://192.168.3.40:8983/solr";
+	public static final String baseURL = "http://192.168.3.17:9080/solr";
 	
 	private NationalSolrEnterpriseQuery query = new NationalSolrEnterpriseQuery(baseURL);
 	

@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.topsoft.search</groupId>
     <artifactId>solr</artifactId>
-    <version>0.2</version>
+    <version>0.1</version>
   </parent>
   <artifactId>icis-nameverify-client</artifactId>
   <name>icis-nameverify-client</name>

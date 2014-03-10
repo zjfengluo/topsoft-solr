@@ -51,4 +51,11 @@ public interface NationalEntBaseInfo {
 	 * @return 成立日期
 	 */
 	Date getEstDate();
+	
+	/**
+	 * 获取企业类型代码
+	 * 
+	 * @return
+	 */
+	String getEntType();
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 public class NationalEntBaseInfoBean implements NationalEntBaseInfo {
 	
 	public NationalEntBaseInfoBean(Long id, String entName, String regNo,
-			String leRep, String regOrgName, Date estDate) {
+			String leRep, String regOrgName, Date estDate, String entType) {
 		super();
 		this.id = id;
 		this.entName = entName;
@@ -13,6 +13,7 @@ public class NationalEntBaseInfoBean implements NationalEntBaseInfo {
 		this.leRep = leRep;
 		this.regOrgName = regOrgName;
 		this.estDate = estDate;
+		this.entType = entType;
 	}
 
 	private Long id;
@@ -26,6 +27,8 @@ public class NationalEntBaseInfoBean implements NationalEntBaseInfo {
 	private String regOrgName;
 	
 	private Date estDate;
+	
+	private String entType;
 
 	public Long getId() {
 		return id;
@@ -73,6 +76,14 @@ public class NationalEntBaseInfoBean implements NationalEntBaseInfo {
 
 	public void setEstDate(Date estDate) {
 		this.estDate = estDate;
+	}
+
+	public String getEntType() {
+		return entType;
+	}
+
+	public void setEntType(String entType) {
+		this.entType = entType;
 	}
 
 }
