@@ -52,9 +52,9 @@
   <!--</cores>-->
 
   <cores adminPath="/admin/cores" host="${host:}" hostPort="${jetty.port:8983}" hostContext="${hostContext:solr}">
-    <core name="${solr.core0.name}" instanceDir="${solr.core0.directory}" />
+    <!--<core name="${solr.core0.name}" instanceDir="${solr.core0.directory}" />
     <core name="${solr.core1.name}" instanceDir="${solr.core1.directory}" />
-    <core name="${solr.core2.name}" instanceDir="${solr.core2.directory}" />
+    <core name="${solr.core2.name}" instanceDir="${solr.core2.directory}" />-->
     <core name="${solr.entbaseinfo.name}" instanceDir="${solr.entbaseinfo.directory}" />
   </cores>
 </solr>

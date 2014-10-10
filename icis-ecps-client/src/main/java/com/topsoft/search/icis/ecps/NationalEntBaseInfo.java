@@ -58,4 +58,10 @@ public interface NationalEntBaseInfo {
 	 * @return
 	 */
 	String getEntType();
+
+  /**
+   * 获取企业uuid
+   * @return
+   */
+  String getUuid();
 }

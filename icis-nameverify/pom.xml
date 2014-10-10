@@ -134,9 +134,10 @@
                     <include>solr.xml</include>
                   </includes>
                 </resource>
+                <!-- Deprecate dataimport.properties, will be remove. -->
                 <!-- Copies dataimport.properties to correct directory and applies properties
                      filering to it.
-                -->
+
                 <resource>
                   <directory>${project.basedir}/src/main/solr</directory>
                   <filtering>true</filtering>
@@ -145,6 +146,8 @@
                     <include>dataimport.properties</include>
                   </includes>
                 </resource>
+                -->
+
                 <!-- Copies core0 configuration files -->
                 <resource>
                   <directory>${project.basedir}/src/main/multicore/core0/config</directory>

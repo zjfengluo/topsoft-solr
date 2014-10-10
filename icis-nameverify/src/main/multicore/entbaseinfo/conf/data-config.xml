@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<dataConfig>  
+<dataConfig>
   <propertyWriter dateFormat="yyyy-MM-dd HH:mm:ss" type="SimplePropertiesWriter"/>
-  <dataSource type="JdbcDataSource"               
-			  driver="oracle.jdbc.OracleDriver"
-              url="jdbc:oracle:thin:@192.168.3.35:1521:tmcpp" 
-              user="ecps" 
-			  batchsize="20"
-              password="oracle" />
+  <dataSource type="JdbcDataSource"
+              driver="${solr.dataimport.jdbc.driver}"
+              url="${solr.dataimport.jdbc.url}"
+              user="${solr.dataimport.jdbc.user}"
+              password="${solr.dataimport.jdbc.password}"
+              batchsize="20" />
   <document>
-    <entity name="entbase" pk="ID" 
+    <entity name="entbase" pk="ID"
             query="select m.ID,
 		            m.entName,
 		            length(trim(m.entName)) as entNameLength,
@@ -18,7 +18,7 @@
 					nvl2(m.estDate,to_char(m.estDate,'YYYY-MM-DD')||'T00:00:00Z',null) as estDate,
 		            coalesce(m.Dom,m.OpLoc) as domOrOpLoc,
 		            m.regCap,
-		            (case 
+		            (case
 						when m.RegCap is null then null
 						when m.RegCap &lt; 10 then '1'
 						when m.RegCap &lt; 100 and m.RegCap &gt;= 10 then '2'
@@ -30,7 +30,8 @@
 		            m.industryPhyName,
 		            m.opLocDistrict,
 					m.entType,
-					m.entTypeName
+					m.entTypeName,
+          m.uuid
 					from ICIS_MarPriPInfo m"
 			deltaImportQuery="select m.id,
 		            m.entName,
@@ -41,7 +42,7 @@
 					nvl2(m.estDate,to_char(m.estDate,'YYYY-MM-DD')||'T00:00:00Z',null) as estDate,
 		            coalesce(m.Dom,m.OpLoc) as domOrOpLoc,
 		            m.regCap,
-		            (case 
+		            (case
 						when m.RegCap is null then null
 						when m.RegCap &lt; 10 then 1
 						when m.RegCap &lt; 100 and m.RegCap &gt;= 10 then 2
@@ -53,9 +54,10 @@
 		            m.industryPhyName,
 		            m.opLocDistrict,
 					m.entType,
-					m.entTypeName
+					m.entTypeName,
+          m.uuid
 					from ICIS_MarPriPInfo m where m.ID='${dataimporter.delta.ID}'"
-			deltaQuery="select m.ID from ICIS_MarPriPInfo m where m.Timestamp &gt; to_timestamp('${dataimporter.last_index_time}', 'YYYY-MM-DD HH24:MI:SS')">	
+			deltaQuery="select m.ID from ICIS_MarPriPInfo m where m.Timestamp &gt; to_timestamp('${dataimporter.last_index_time}', 'YYYY-MM-DD HH24:MI:SS')">
 			<field column="ID" name="id"/>
     </entity>
   </document>
