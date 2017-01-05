@@ -1,3 +1,4 @@
+
 package com.topsoft.search.annotations;
 
 import org.apache.solr.client.solrj.beans.Field;
@@ -31,6 +32,7 @@ public class AnnotationsTest {
 
   @Test
   public void testGetHighlightFieldNames() {
+    int i = 1;
     Set<String> fieldNames = Annotations.getHighlightFieldNames(AnnotationsTest.class);
     assertThat(fieldNames, hasItems("name", "id", "shengri", "someValueElse"));
   }
