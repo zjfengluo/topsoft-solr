@@ -14,6 +14,7 @@ import static org.junit.Assert.assertThat;
  * @author wangyg
  */
 public class AnnotationsTest {
+	
   @Highlight
   @DocumentId
   private Long id;
