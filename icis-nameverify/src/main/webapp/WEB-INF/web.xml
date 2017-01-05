@@ -32,6 +32,7 @@
              "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl"/>
   <system-property javax.xml.parsers.SAXParserFactory=
              "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl"/>
+
    -->
 
   <!-- People who want to hardcode their "Solr Home" directly into the
@@ -45,6 +46,7 @@
     </env-entry>
    -->
   <listener>
+   
     <listener-class>com.topsoft.search.solr.schedule.web.DataImportListener</listener-class>
   </listener>
 
@@ -88,10 +90,10 @@
       this dispatcher as <dispatcher>FORWARD</dispatcher>.
     -->
     <filter-name>SolrRequestFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+  <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-  <servlet>
+  <servlet> 
     <servlet-name>Zookeeper</servlet-name>
     <servlet-class>org.apache.solr.servlet.ZookeeperInfoServlet</servlet-class>
   </servlet>
@@ -127,7 +129,7 @@
     <init-param>
       <param-name>destination</param-name>
       <param-value>${context}/#/~logging</param-value>
-    </init-param>
+    </init-param>d
   </servlet>
 
   <servlet>
