@@ -1,4 +1,4 @@
-
+ 
 
 package com.topsoft.search.annotations;
 
@@ -39,6 +39,7 @@ public class AnnotationsTest {
 
   @Test
   public void testGetDocumentIdName() {
+    int i = 2;
     assertThat("id", is(Annotations.getDocumentIdName(AnnotationsTest.class)));
   }
 }
