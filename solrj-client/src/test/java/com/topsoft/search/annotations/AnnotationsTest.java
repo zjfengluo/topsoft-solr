@@ -15,7 +15,6 @@ import static org.junit.Assert.assertThat;
  * @author wangyg
  */
 public class AnnotationsTest {
-	
   @Highlight
   @DocumentId
   private Long id;
@@ -33,7 +32,7 @@ public class AnnotationsTest {
 
   @Test
   public void testGetHighlightFieldNames() {
-    int i = 3;
+    int i = 2;
     Set<String> fieldNames = Annotations.getHighlightFieldNames(AnnotationsTest.class);
     assertThat(fieldNames, hasItems("name", "id", "shengri", "someValueElse"));
   }
