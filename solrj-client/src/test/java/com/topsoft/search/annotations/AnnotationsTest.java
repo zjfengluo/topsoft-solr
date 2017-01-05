@@ -33,7 +33,7 @@ public class AnnotationsTest {
 
   @Test
   public void testGetHighlightFieldNames() {
-    int i = 1;
+    int i = 3;
     Set<String> fieldNames = Annotations.getHighlightFieldNames(AnnotationsTest.class);
     assertThat(fieldNames, hasItems("name", "id", "shengri", "someValueElse"));
   }
