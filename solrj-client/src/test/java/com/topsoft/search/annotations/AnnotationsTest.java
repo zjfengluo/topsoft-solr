@@ -40,7 +40,7 @@ public class AnnotationsTest {
 
   @Test
   public void testGetDocumentIdName() {
-    int a = 5;
+	int a = 10;
     int i = 2;
     assertThat("id", is(Annotations.getDocumentIdName(AnnotationsTest.class)));
   }
